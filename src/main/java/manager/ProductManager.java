@@ -23,7 +23,7 @@ class ProductManager {
     }
 
     public void addProduct(String name, String description, double price, int quantity, int category_id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Product (name,description,price,quantity,category) " +
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO product (name,description,price,quantity,category) " +
                 "VALUES (?,?,?,?,?)")) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, description);
@@ -37,7 +37,7 @@ class ProductManager {
     }
 
     public void editProductByID(int id, String name, String description, double price, int quantity, int category_id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("Update Product SET  name = ?, description = ?, " +
+        try (PreparedStatement preparedStatement = connection.prepareStatement("Update product SET  name = ?, description = ?, " +
                 "price = ?, quantity = ?, category = ? where  id = ?")) {
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, description);
@@ -61,7 +61,7 @@ class ProductManager {
 
     private List<Product> getAllProduct() {
         List<Product> products = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Product")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM product")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Product product = new Product();
@@ -80,7 +80,7 @@ class ProductManager {
     }
 
     public void deleteProductByID(int id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("Delete FROM Product where id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("Delete FROM product where id = ?")) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -88,9 +88,9 @@ class ProductManager {
         }
     }
 
-    public int getSumOfProduct() {
+    public int getAllProductsCount() {
         int sum = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(quantity) AS SUM  from Product")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT COUNT(quantity) AS SUM  from product")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 sum = resultSet.getInt(1);
@@ -101,9 +101,9 @@ class ProductManager {
         return sum;
     }
 
-    public double getMaxOfPriceProduct() {
+    public double getProductsMaximumPrice() {
         double max = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT MAX(price) AS MAX_PRICE  from Product")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT MAX(price) AS MAX_PRICE  from product")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 max = resultSet.getDouble(1);
@@ -114,9 +114,9 @@ class ProductManager {
         return max;
     }
 
-    public double getMinOfPriceProduce() {
+    public double getProductsMinimumPrice() {
         double min = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT MIN(price) AS MIN_PRICE  from Product")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT MIN(price) AS MIN_PRICE  from product")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 min = resultSet.getDouble(1);
@@ -127,9 +127,9 @@ class ProductManager {
         return min;
     }
 
-    public double getAVGOfPriceProduct() {
+    public double getProductsAveragePrice() {
         double avg = 0;
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(price) AS AVG_PRICE  from Product")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT AVG(price) AS AVG_PRICE  from product")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 avg = resultSet.getDouble(1);

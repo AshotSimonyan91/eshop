@@ -35,19 +35,19 @@ public class GeneralManager implements Commands {
     }
 
     private void printAVGOfPriceProduct() {
-        System.out.println(productManager.getAVGOfPriceProduct());
+        System.out.println(productManager.getProductsAveragePrice());
     }
 
     private void printMINOfPriceProduct() {
-        System.out.println(productManager.getMinOfPriceProduce());
+        System.out.println(productManager.getProductsMinimumPrice());
     }
 
     private void printMAXOfPriceProduct() {
-        System.out.println(productManager.getMaxOfPriceProduct());
+        System.out.println(productManager.getProductsMaximumPrice());
     }
 
     private void printSUMOfProduct() {
-        System.out.println(productManager.getSumOfProduct());
+        System.out.println(productManager.getAllProductsCount());
     }
 
     private void deleteProductByID() {

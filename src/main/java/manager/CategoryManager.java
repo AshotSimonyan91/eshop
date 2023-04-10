@@ -22,7 +22,7 @@ class CategoryManager {
     public void addCategory(String name) {
         Category category = new Category();
         category.setName(name);
-        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO Category (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO category (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
@@ -39,7 +39,7 @@ class CategoryManager {
         Category category = new Category();
         category.setId(id);
         category.setName(name);
-        try (PreparedStatement preparedStatement = connection.prepareStatement("Update Category SET  name = ? where id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("Update category SET  name = ? where id = ?")) {
             preparedStatement.setString(1, category.getName());
             preparedStatement.setInt(2, category.getId());
             preparedStatement.executeUpdate();
@@ -50,7 +50,7 @@ class CategoryManager {
 
 
     public void deleteCategoryByID(int id) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement("Delete FROM Category where id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("Delete FROM category where id = ?")) {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ class CategoryManager {
 
     public List<Category> getAllCategory() {
         List<Category> categories = new ArrayList<>();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Category")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category")) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Category category = new Category();
@@ -83,7 +83,7 @@ class CategoryManager {
 
     public Category getByID(int id) {
         Category category = new Category();
-        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Category where id = ?")) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM category where id = ?")) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
